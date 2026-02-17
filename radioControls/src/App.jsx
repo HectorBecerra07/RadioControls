@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Companies from './pages/Companies';
+import Footer from './components/Footer';
 
 // Componente para envolver las rutas y permitir animaciones
 const AnimatedRoutes = () => {
@@ -56,15 +57,7 @@ function App() {
           <AnimatedRoutes />
         </main>
 
-        {/* Footer */}
-        <footer className="py-12 text-center text-gray-600 text-sm relative z-10 bg-black border-t border-gray-900 mt-20">
-          <p className="mb-2">&copy; {new Date().getFullYear()} RadioControls. Ambient Audio Solutions.</p>
-          <div className="flex justify-center gap-4 mt-4">
-              <a href="#" className="hover:text-cyan-400 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Terms</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Contact</a>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </BrowserRouter>
   );

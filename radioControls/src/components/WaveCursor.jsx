@@ -14,7 +14,7 @@ const WaveCursor = () => {
     const config = {
       lineCount: 40,        // Más líneas para más detalle
       speed: 0.02,          // Velocidad de movimiento
-      amplitude: 30,        // Altura base de las ondas
+      amplitude: 60,        // Altura base de las ondas (aumentada)
       frequency: 0.01,      // Frecuencia de la onda
       resolution: 5,        // Menor número = Mayor definición (más suave)
       baseColor: { h: 180, s: 100, l: 50 }, // Cyan base
@@ -55,9 +55,8 @@ const WaveCursor = () => {
         ctx.strokeStyle = `hsla(${hue}, 80%, 60%, 0.5)`; // Más opaco y brillante
         ctx.lineWidth = 2; // Líneas más gruesas
 
-        // Centrado: Empieza al 30% de la altura y ocupa el 40% (del 30% al 70%)
-        // Esto las coloca justo en el medio, detrás del texto principal
-        const yOffset = (height * 0.30) + (height * 0.40) * (i / config.lineCount);
+        // Centrado expandido: Empieza al 20% y ocupa el 60% (del 20% al 80%)
+        const yOffset = (height * 0.20) + (height * 0.60) * (i / config.lineCount);
 
         for (let x = 0; x <= width; x += config.resolution) {
             // Distancia del mouse a la línea actual (aproximada)
