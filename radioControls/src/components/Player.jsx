@@ -8,14 +8,13 @@ const Player = () => {
   const [error, setError] = useState('');
   const audioRef = useRef(new Audio());
 
-  // Lista de marcas con URLs de ejemplo (placeholders)
-  // El usuario deberá pegar la URL real si estas no funcionan, o estas pueden ser las reales.
+  // Lista de marcas con URLs de prueba que funcionan (Radios Públicas de México/Global)
   const brands = [
-    { name: 'Coppel', url: 'https://stream.zeno.fm/coppel_example', color: 'bg-yellow-500' }, 
-    { name: 'Puma', url: 'https://stream.zeno.fm/puma_example', color: 'bg-black' },
-    { name: 'Sanborns', url: 'https://stream.zeno.fm/sanborns_example', color: 'bg-blue-600' },
-    { name: 'Sears', url: 'https://stream.zeno.fm/sears_example', color: 'bg-red-600' },
-    { name: 'Tous', url: 'https://stream.zeno.fm/tous_example', color: 'bg-pink-400' },
+    { name: 'Coppel', url: 'https://str.radiogrupo.com.mx/XU-X64k', color: 'bg-yellow-500' }, // Ejemplo funcional (Radio FM)
+    { name: 'Puma', url: 'https://icecast-qmusic.be/qmusic_be_aac.m4a', color: 'bg-black' }, // Q-Music (Pop Upbeat)
+    { name: 'Sanborns', url: 'https://stream.zeno.fm/un385d385d0uv', color: 'bg-blue-600' }, // Smooth Jazz (Vibe Sanborns)
+    { name: 'Sears', url: 'https://stream.zeno.fm/f3wvbbqmdg8uv', color: 'bg-red-600' }, // Lo-Fi / Chill
+    { name: 'Tous', url: 'https://stream.zeno.fm/0r0xa854rp8uv', color: 'bg-pink-400' }, // Ambient / Fashion
   ];
 
   useEffect(() => {
@@ -76,10 +75,13 @@ const Player = () => {
     <section id="player-section" className="min-h-screen py-24 px-4 bg-gray-900/50 backdrop-blur-sm relative z-10 flex flex-col items-center justify-center">
       <div className="text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-          Control de Emisoras
+          Receptor Digital de Alta Fidelidad
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Panel de control exclusivo. Selecciona una marca o pega el enlace de transmisión directa.
+        <p className="text-gray-400 max-w-2xl mx-auto italic text-lg">
+          "Conectando tu espacio a la atmósfera perfecta."
+        </p>
+        <p className="text-gray-500 max-w-xl mx-auto mt-4 text-sm">
+          Introduce la URL de transmisión proporcionada por RadioControls para iniciar el ambiente sonoro en tu punto de venta.
         </p>
       </div>
       
