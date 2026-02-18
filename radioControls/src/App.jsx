@@ -11,17 +11,19 @@ import ClientPortal from './pages/ClientPortal';
 import Admin from './pages/Admin';
 import BranchPlayer from './pages/BranchPlayer';
 import Login from './pages/Login';
+import Register from './pages/Register';
+import { AppProviders } from './components/AppProviders';
 import Footer from './components/Footer';
 
 const MainLayout = () => {
   const location = useLocation();
   const isPlayer = location.pathname.startsWith('/player/');
-  const isLogin = location.pathname === '/login';
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
   const isDashboard = location.pathname === '/dashboard';
 
   return (
     <div className="flex flex-col min-h-screen">
-      {(!isPlayer && !isLogin && !isDashboard) && <Navbar />}
+      {(!isPlayer && !isAuthPage && !isDashboard) && <Navbar />}
       
       <main className="flex-grow">
         <Routes>
@@ -32,6 +34,7 @@ const MainLayout = () => {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<ClientPortal />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/player/:branchSlug" element={<BranchPlayer />} />
@@ -39,7 +42,7 @@ const MainLayout = () => {
         </Routes>
       </main>
 
-      {(!isPlayer && !isLogin && !isDashboard) && <Footer />}
+      {(!isPlayer && !isAuthPage && !isDashboard) && <Footer />}
     </div>
   );
 };
@@ -47,9 +50,11 @@ const MainLayout = () => {
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg-royal-blue-dark text-white min-h-screen">
-        <MainLayout />
-      </div>
+      <AppProviders>
+        <div className="bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text min-h-screen">
+          <MainLayout />
+        </div>
+      </AppProviders>
     </BrowserRouter>
   );
 }
