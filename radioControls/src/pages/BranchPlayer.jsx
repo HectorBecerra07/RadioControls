@@ -10,7 +10,7 @@ const BranchPlayer = () => {
   // En producción, aquí buscaríamos la URL asignada a este slug mediante un API call
   const branchData = {
     name: branchSlug.replace('-', ' ').toUpperCase(),
-    streamUrl: "https://stream.zeno.fm/un385d385d0uv", // URL Dinámica
+    streamUrl: "/audios/Tutiendahabla.mp3", // URL Dinámica (Local Fallback)
     stationName: "RadiOlea Ambient Mix"
   };
 
