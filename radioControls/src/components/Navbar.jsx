@@ -79,7 +79,6 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-4 relative z-[110]">
-            <ThemeToggle />
             {isAuthenticated ? (
               <>
                 <button 
@@ -110,7 +109,6 @@ const Navbar = () => {
 
           {/* Mobile Menu & Action Buttons */}
           <div className="lg:hidden flex items-center gap-2 relative z-[110] shrink-0">
-            <ThemeToggle />
             <button 
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-xl transition-all ${isOpen ? 'bg-light-accent dark:bg-dark-accent text-white dark:text-dark-background' : 'text-light-text dark:text-white bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10'}`}
