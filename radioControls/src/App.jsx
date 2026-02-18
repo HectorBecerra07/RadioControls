@@ -12,8 +12,7 @@ import Admin from './pages/Admin';
 import BranchPlayer from './pages/BranchPlayer';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { AuthProvider } from './components/AuthContext';
-import { ThemeProvider } from './components/ThemeProvider';
+import { AppProviders } from './components/AppProviders';
 import Footer from './components/Footer';
 
 const MainLayout = () => {
@@ -51,13 +50,11 @@ const MainLayout = () => {
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <ThemeProvider>
-          <div className="bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text min-h-screen">
-            <MainLayout />
-          </div>
-        </ThemeProvider>
-      </AuthProvider>
+      <AppProviders>
+        <div className="bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text min-h-screen">
+          <MainLayout />
+        </div>
+      </AppProviders>
     </BrowserRouter>
   );
 }
