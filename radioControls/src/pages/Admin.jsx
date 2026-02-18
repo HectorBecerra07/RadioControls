@@ -12,11 +12,11 @@ const Admin = () => {
   return (
     <div className="pt-32 pb-20 px-4 max-w-7xl mx-auto">
       <div className="mb-12">
-        <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
-          <ShieldCheck className="text-cyan-400 w-10 h-10" />
-          Configuración de Terminales
+        <h1 className="text-4xl md:text-6xl font-black mb-6 uppercase tracking-tighter">
+          <ShieldCheck className="inline-block w-10 h-10 md:w-14 md:h-14 text-neon-cyan mr-4 mb-2" />
+          Terminales
         </h1>
-        <p className="text-gray-400 text-lg">Asigna y gestiona las URLs de streaming para cada punto de venta.</p>
+        <p className="text-lg md:text-xl text-gray-400 max-w-2xl">Asigna y gestiona las URLs de streaming para cada punto de venta.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
