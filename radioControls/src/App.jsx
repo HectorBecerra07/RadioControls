@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import LandingPage from './pages/LandingPage';
+import Services from './pages/Services';
+import Pricing from './pages/Pricing';
+import Gallery from './pages/Gallery';
+import FAQ from './pages/FAQ';
+import Contact from './pages/Contact';
+import ClientPortal from './pages/ClientPortal';
+import Admin from './pages/Admin';
+import BranchPlayer from './pages/BranchPlayer';
+import Login from './pages/Login';
+import Footer from './components/Footer';
 
-function App() {
-  const [count, setCount] = useState(0)
+const MainLayout = () => {
+  const location = useLocation();
+  const isPlayer = location.pathname.startsWith('/player/');
+  const isLogin = location.pathname === '/login';
+  const isDashboard = location.pathname === '/dashboard';
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex flex-col min-h-screen">
+      {(!isPlayer && !isLogin && !isDashboard) && <Navbar />}
+      
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/servicios" element={<Services />} />
+          <Route path="/planes" element={<Pricing />} />
+          <Route path="/galeria" element={<Gallery />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<ClientPortal />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/player/:branchSlug" element={<BranchPlayer />} />
+          <Route path="*" element={<LandingPage />} />
+        </Routes>
+      </main>
+
+      {(!isPlayer && !isLogin && !isDashboard) && <Footer />}
+    </div>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="bg-royal-blue-dark text-white min-h-screen">
+        <MainLayout />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,87 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+  STAFF
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  INCOMPLETE
+}
+
+enum PlanType {
+  MONTHLY
+  YEARLY
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  password      String         // Hash de la contraseña
+  name          String?
+  companyName   String?
+  role          Role           @default(CLIENT)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  // Relaciones
+  branches      Branch[]       // Sucursales propiedad del usuario
+  subscription  Subscription?  // Datos de pago
+}
+
+model Station {
+  id          String   @id @default(cuid())
+  name        String
+  streamUrl   String   // URL de Icecast/Shoutcast/HLS
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relaciones
+  branches    Branch[] // Sucursales que usan esta estación
+}
+
+model Branch {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique // Para el link personalizado: dominio.com/player/slug
+  status      String   @default("Offline")
+  
+  // Relaciones
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id])
+  
+  stationId   String?
+  station     Station? @relation(fields: [stationId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Subscription {
+  id               String             @id @default(cuid())
+  userId           String             @unique
+  user             User               @relation(fields: [userId], references: [id])
+  
+  stripeCustomerId String             @unique
+  stripePriceId    String?
+  status           SubscriptionStatus @default(INCOMPLETE)
+  plan             PlanType           @default(MONTHLY)
+  
+  currentPeriodEnd DateTime?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+}
