@@ -1,7 +1,93 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Wifi, Speaker, Radio, Settings, Zap, ArrowRight } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
+const devices = [
+  // ... (device data remains the same)
+];
+
+const Providers = () => {
+  const { theme } = useTheme();
+
+  return (
+    <section className="py-24 px-4 bg-light-background dark:bg-black relative z-10 flex flex-col items-center justify-center overflow-hidden">
+      {theme === 'dark' && (
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_10%,rgba(6,182,212,0.15),transparent_50%)] pointer-events-none" />
+      )}
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 text-center mb-20 max-w-3xl"
+      >
+        <span className="text-light-accent dark:text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4 block">Hardware Premium</span>
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-light-text dark:text-white tracking-tight">
+          Nuestros Dispositivos <span className="text-transparent bg-clip-text bg-gradient-to-r from-light-accent to-blue-600 dark:from-cyan-400 dark:to-purple-600">Ambientales</span>
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+          Equipamiento diseñado específicamente para uso continuo en retail y hospitalidad. 
+          Robustez, calidad de audio y conectividad inigualable.
+        </p>
+      </motion.div>
+      
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full">
+        {devices.map((device, index) => (
+          <motion.div
+            key={device.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+            whileHover={{ y: -10 }}
+            className="group relative bg-white dark:bg-gray-900 border border-black/10 dark:border-gray-800 rounded-3xl p-1 overflow-hidden hover:border-light-accent/50 dark:hover:border-cyan-500/50 transition-colors duration-500"
+          >
+            <div className="bg-white/50 dark:bg-black/50 backdrop-blur-xl rounded-[20px] p-8 h-full flex flex-col relative z-10">
+              
+              <div className="flex justify-between items-start mb-6">
+                <div className="w-14 h-14 bg-light-card dark:bg-gray-800 rounded-2xl flex items-center justify-center group-hover:bg-light-accent dark:group-hover:bg-cyan-500 group-hover:text-white dark:group-hover:text-black transition-all duration-500 text-light-accent dark:text-cyan-400 shadow-lg shadow-black/5 dark:shadow-black/50 group-hover:shadow-light-accent/20 dark:group-hover:shadow-cyan-500/20">
+                  {React.cloneElement(device.icon, { className: "w-7 h-7" })}
+                </div>
+                <span className="px-3 py-1 rounded-full bg-light-card dark:bg-gray-800 border border-black/10 dark:border-gray-700 text-xs font-mono text-gray-500 dark:text-gray-300 group-hover:border-light-accent/30 dark:group-hover:border-cyan-500/30 transition-colors">
+                  {device.tag}
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-bold text-light-text dark:text-white mb-3 group-hover:text-light-accent dark:group-hover:text-cyan-400 transition-colors">
+                {device.name}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                {device.description}
+              </p>
+
+              <div className="space-y-3 border-t border-black/10 dark:border-gray-800 pt-6 mb-6">
+                {device.features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center text-sm text-gray-500 dark:text-gray-300">
+                    <div className="w-1.5 h-1.5 rounded-full bg-light-accent dark:bg-cyan-500 mr-2" />
+                    {feature}
+                  </div>
+                ))}
+              </div>
+
+              <button className="w-full py-3 rounded-xl border border-black/10 dark:border-gray-700 text-light-text dark:text-white font-medium hover:bg-light-text dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-light-text dark:hover:border-white transition-all duration-300 flex items-center justify-center gap-2 group/btn">
+                Ver Especificaciones
+                <ArrowRight className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+              </button>
+            </div>
+
+            {theme === 'dark' && (
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            )}
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// I need to add the device data back in as it was removed for brevity in the previous turn.
 const devices = [
   { 
     id: 1,
@@ -52,86 +138,5 @@ const devices = [
     description: 'Control elegante empotrado en pared. Permite al personal cambiar el ambiente con un solo toque.' 
   },
 ];
-
-const Providers = () => {
-  return (
-    <section className="min-h-screen py-24 px-4 bg-black relative z-10 flex flex-col items-center justify-center overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_10%,rgba(6,182,212,0.15),transparent_50%)] pointer-events-none" />
-      
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 text-center mb-20 max-w-3xl"
-      >
-        <span className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4 block">Hardware Premium</span>
-        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight">
-          Nuestros Dispositivos <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600">Ambientales</span>
-        </h2>
-        <p className="text-gray-400 text-lg leading-relaxed">
-          Equipamiento diseñado específicamente para uso continuo en retail y hospitalidad. 
-          Robustez, calidad de audio y conectividad inigualable.
-        </p>
-      </motion.div>
-      
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full">
-        {devices.map((device, index) => (
-          <motion.div
-            key={device.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            whileHover={{ y: -10 }}
-            className="group relative bg-gray-900 border border-gray-800 rounded-3xl p-1 overflow-hidden hover:border-cyan-500/50 transition-colors duration-500"
-          >
-            {/* Inner Card */}
-            <div className="bg-black/50 backdrop-blur-xl rounded-[20px] p-8 h-full flex flex-col relative z-10">
-              
-              {/* Header Icon & Tag */}
-              <div className="flex justify-between items-start mb-6">
-                <div className="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center group-hover:bg-cyan-500 group-hover:text-black transition-all duration-500 text-cyan-400 shadow-lg shadow-black/50 group-hover:shadow-cyan-500/20">
-                  {React.cloneElement(device.icon, { className: "w-7 h-7" })}
-                </div>
-                <span className="px-3 py-1 rounded-full bg-gray-800 border border-gray-700 text-xs font-mono text-gray-300 group-hover:border-cyan-500/30 transition-colors">
-                  {device.tag}
-                </span>
-              </div>
-
-              {/* Title & Desc */}
-              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
-                {device.name}
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-                {device.description}
-              </p>
-
-              {/* Features List */}
-              <div className="space-y-3 border-t border-gray-800 pt-6 mb-6">
-                {device.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-center text-sm text-gray-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 mr-2" />
-                    {feature}
-                  </div>
-                ))}
-              </div>
-
-              {/* Action */}
-              <button className="w-full py-3 rounded-xl border border-gray-700 text-white font-medium hover:bg-white hover:text-black hover:border-white transition-all duration-300 flex items-center justify-center gap-2 group/btn">
-                Ver Especificaciones
-                <ArrowRight className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
-              </button>
-            </div>
-
-            {/* Hover Gradient Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-};
 
 export default Providers;
