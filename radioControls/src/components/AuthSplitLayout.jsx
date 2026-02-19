@@ -1,8 +1,12 @@
 import React from 'react';
 import { Radio } from 'lucide-react';
 import WaveCursor from './WaveCursor';
+import { useAuth } from './AuthContext';
 
 const AuthSplitLayout = ({ children }) => {
+  const { user, isAuthenticated } = useAuth();
+  const firstName = user?.name ? user.name.split(' ')[0] : 'Clientes';
+
   return (
     <div className="min-h-screen bg-slate-950 relative overflow-hidden">
       {/* Ondas interactivas de fondo */}
@@ -26,7 +30,7 @@ const AuthSplitLayout = ({ children }) => {
               <div className="mt-20">
                 <h1 className="text-5xl font-bold tracking-tight leading-tight">
                   Hello, <br />
-                  <span className="text-neon-cyan">Portal Clientes 👋</span>
+                  <span className="text-neon-cyan uppercase">{firstName} 👋</span>
                 </h1>
                 <p className="mt-6 max-w-md text-xl text-blue-100/80 font-light leading-relaxed">
                   Gestiona tu audio, analiza el comportamiento de tus clientes y eleva la experiencia de tu marca a un nuevo nivel.

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Mail, Lock, ArrowRight, User as UserIcon, Radio, ArrowLeft } from 'lucide-react';
 import AuthSplitLayout from '../components/AuthSplitLayout';
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const { register: authRegister } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,23 +23,18 @@ const Register = () => {
     setIsLoading(true);
     setError('');
 
-    try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'No se pudo crear la cuenta.');
+    // Registro Local
+    const result = authRegister({ name, email, password });
+    
+    setTimeout(() => {
+      if (result.success) {
+        const redirectTo = location.state?.redirectTo;
+        navigate('/login', { state: { redirectTo, message: '¡Cuenta creada localmente! Inicia sesión para continuar.' } });
+      } else {
+        setError(result.message);
+        setIsLoading(false);
       }
-      console.log('Registration successful');
-      navigate('/login');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
+    }, 800);
   };
 
   return (

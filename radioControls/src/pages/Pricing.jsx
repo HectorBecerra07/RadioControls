@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Zap, Star, ShieldCheck, ArrowRight, HelpCircle, TrendingUp, Info, Sparkles } from 'lucide-react';
+import { CheckCircle2, Zap, Star, ShieldCheck, ArrowRight, HelpCircle, TrendingUp, Info, Sparkles, Headphones } from 'lucide-react';
 import WaveCursor from '../components/WaveCursor';
+import { useAuth } from '../components/AuthContext';
 
 const Pricing = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  
+  const handlePlanSelection = (planId) => {
+    if (isAuthenticated) {
+      navigate(`/checkout/${planId}`);
+    } else {
+      // Redirigir a registro, pero guardando la intención de compra
+      navigate('/register', { state: { redirectTo: `/checkout/${planId}` } });
+    }
+  };
+
   const plans = [
     {
       id: 'basico',
@@ -94,7 +106,7 @@ const Pricing = () => {
             transition={{ delay: 0.1 }}
             className="text-lg md:text-2xl text-slate-400 max-w-3xl mx-auto font-medium leading-relaxed"
           >
-            Aumenta tus ventas un 15% o te devolvemos tu dinero. Resultados sonoros garantizados.
+            Ingeniería de audio de élite con soporte técnico especializado 24/7 y resultados sonoros garantizados.
           </motion.p>
         </div>
 
@@ -107,14 +119,14 @@ const Pricing = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 + 0.3 }}
               whileHover={{ y: -5 }}
-              className={`relative rounded-[32px] p-0.5 ${plan.highlight ? 'bg-gradient-to-b from-neon-cyan to-neon-purple shadow-[0_0_30px_rgba(0,243,255,0.2)]' : 'bg-white/10'}`}
+              className={`relative rounded-[32px] p-0.5 ${plan.highlight ? 'bg-gradient-to-b from-neon-cyan to-neon-purple shadow-[0_0_40px_rgba(0,243,255,0.2)]' : 'bg-white/10'}`}
             >
+              {plan.badge && (
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-neon-cyan to-neon-purple text-slate-950 px-6 py-2 rounded-full font-black text-[11px] uppercase tracking-[0.2em] shadow-[0_0_25px_rgba(0,243,255,0.4)] z-50 whitespace-nowrap">
+                  {plan.badge}
+                </div>
+              )}
               <div className={`rounded-[30px] p-8 h-full flex flex-col bg-gradient-to-b ${plan.color} backdrop-blur-xl relative overflow-hidden`}>
-                {plan.badge && (
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r from-neon-cyan to-neon-purple text-royal-blue-dark px-4 py-1 rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg z-20">
-                    {plan.badge}
-                  </div>
-                )}
 
                 <div className="mb-6 relative z-10">
                   <h3 className="text-xl font-black text-white uppercase mb-1">{plan.name}</h3>
@@ -142,7 +154,7 @@ const Pricing = () => {
                 </ul>
 
                 <button 
-                  onClick={() => navigate(`/checkout/${plan.id}`)}
+                  onClick={() => handlePlanSelection(plan.id)}
                   className={`w-full py-4 rounded-xl font-black text-sm transition-all flex items-center justify-center gap-2 group relative z-10 uppercase tracking-widest ${
                   plan.highlight 
                   ? 'bg-neon-cyan text-slate-950 hover:shadow-[0_0_30px_rgba(0,243,255,0.5)]' 
@@ -167,13 +179,13 @@ const Pricing = () => {
             <div className="absolute top-0 right-0 w-96 h-96 bg-neon-cyan/5 rounded-full blur-[100px] -mr-48 -mt-48 transition-all group-hover:bg-neon-cyan/10" />
             
             <div className="flex flex-col md:flex-row items-center gap-16 relative z-10">
-              <div className="w-40 h-40 bg-slate-950 rounded-[48px] flex items-center justify-center shrink-0 border border-white/5 shadow-2xl">
-                <ShieldCheck className="w-20 h-20 text-neon-cyan group-hover:scale-110 transition-transform duration-700" />
+            <div className="w-40 h-40 bg-slate-950 rounded-[48px] flex items-center justify-center shrink-0 border border-white/5 shadow-2xl">
+                <Headphones className="w-20 h-20 text-neon-cyan group-hover:scale-110 transition-transform duration-700" />
               </div>
               <div>
-                <h2 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter leading-none">Garantía <span className="text-neon-cyan italic">RadiOlea</span></h2>
+                <h2 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter leading-none">Soporte <span className="text-neon-cyan italic">Elite 24/7</span></h2>
                 <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-medium">
-                  Si después de 6 meses no logras demostrar un <span className="text-white font-black underline decoration-neon-cyan decoration-4 underline-offset-8">aumento del 15% en tus ventas</span>, te devolvemos el 100% de tu inversión.
+                  Nuestro equipo de ingenieros de audio monitorea tu señal en tiempo real para garantizar que tu marca nunca deje de sonar. Atención prioritaria inmediata.
                 </p>
               </div>
             </div>

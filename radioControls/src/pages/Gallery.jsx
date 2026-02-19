@@ -98,7 +98,7 @@ const Gallery = () => {
                   <div className="h-px w-10 bg-white/20" />
                 </div>
 
-                <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-6 leading-none transition-colors group-hover:text-neon-cyan">
+                <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-6 leading-tight transition-colors group-hover:text-neon-cyan pr-4">
                   {cat.title}
                 </h3>
                 

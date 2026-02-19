@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Mail, Lock, ArrowRight, Radio, ArrowLeft } from 'lucide-react';
 import AuthSplitLayout from '../components/AuthSplitLayout';
+import { useAuth } from '../components/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login: authLogin } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -14,24 +17,19 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Credenciales incorrectas.');
+    
+    // Usar el login local
+    const result = authLogin(email, password);
+    
+    setTimeout(() => {
+      if (result.success) {
+        const redirectTo = location.state?.redirectTo || '/dashboard';
+        navigate(redirectTo);
+      } else {
+        setError(result.message);
+        setIsLoading(false);
       }
-      const { user, token } = await response.json();
-      console.log('Login successful:', user, token);
-      navigate('/dashboard');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
+    }, 800); // Pequeña demora para simular realismo
   };
 
   return (
@@ -50,6 +48,11 @@ const Login = () => {
           <h2 className="text-3xl font-black tracking-tighter text-white">
             Bienvenido de Nuevo
           </h2>
+          {location.state?.message && (
+            <p className="mt-2 text-neon-cyan font-bold text-sm bg-neon-cyan/10 p-2 rounded-lg">
+              {location.state.message}
+            </p>
+          )}
           <p className="mt-3 text-slate-400 font-medium">
             ¿No tienes cuenta?{' '}
             <Link to="/register" className="text-neon-cyan hover:text-white transition-colors">
@@ -105,6 +108,20 @@ const Login = () => {
               <p className="text-xs font-bold text-red-400 text-center">{error}</p>
             </div>
           )}
+
+          {/* Botón Demo para pruebas rápidas */}
+          <div className="flex justify-center">
+            <button
+              type="button"
+              onClick={() => {
+                setEmail('demo@radiocontrols.mx');
+                setPassword('password123');
+              }}
+              className="text-[10px] font-black uppercase tracking-widest text-neon-cyan/40 hover:text-neon-cyan transition-colors"
+            >
+              [ Rellenar con cuenta Demo ]
+            </button>
+          </div>
 
           {/* Submit Button */}
           <div className="pt-4">
