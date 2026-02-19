@@ -58,21 +58,21 @@ const LandingPage = () => {
 
           <UniversalPlayer streamUrl="/audios/Tutiendahabla.mp3" stationName="Demo: Tu tienda habla" />
           
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40 grayscale group-hover:grayscale-0 transition-all duration-500">
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 transition-all duration-500">
             <div className="flex flex-col items-center gap-2">
-              <div className="text-[10px] font-black uppercase tracking-widest text-gray-500">Mastering</div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-white">Mastering</div>
               <div className="text-sm font-bold text-white">Digital Pro</div>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <div className="text-[10px] font-black uppercase tracking-widest text-gray-500">Sync</div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-white">Sync</div>
               <div className="text-sm font-bold text-white">Cloud Low Latency</div>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <div className="text-[10px] font-black uppercase tracking-widest text-gray-500">Audio</div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-white">Audio</div>
               <div className="text-sm font-bold text-white">High Fidelity</div>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <div className="text-[10px] font-black uppercase tracking-widest text-gray-500">Network</div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-white">Network</div>
               <div className="text-sm font-bold text-white">Buffer Pro</div>
             </div>
           </div>

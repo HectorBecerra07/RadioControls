@@ -43,33 +43,33 @@ const Register = () => {
     <AuthSplitLayout>
       <Link 
         to="/" 
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-all duration-200"
+        className="fixed top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md shadow-xl transition-all duration-300 z-50"
       >
         <ArrowLeft className="h-4 w-4" /> Inicio
       </Link>
-      <div className="bg-white dark:bg-slate-900/50 p-8 sm:p-12 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xl backdrop-blur-lg">
+      <div className="bg-slate-900/40 backdrop-blur-xl p-8 sm:p-10 rounded-3xl border border-white/10 shadow-[0_0_50px_-12px_rgba(0,243,255,0.2)]">
         <div className="flex flex-col items-center text-center mb-10">
-          <Link to="/" className="mb-6">
-            <Radio className="h-14 w-14 text-blue-600 dark:text-neon-cyan" />
-          </Link>
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Crea tu Cuenta
+          <div className="mb-6 p-4 bg-neon-cyan/10 rounded-2xl border border-neon-cyan/20">
+            <Radio className="h-10 w-10 text-neon-cyan animate-pulse" />
+          </div>
+          <h2 className="text-3xl font-black tracking-tighter text-white">
+            Únete a Nosotros
           </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">
-            ¿Ya tienes una?{' '}
-            <Link to="/login" className="font-semibold text-blue-600 dark:text-neon-cyan hover:underline">
+          <p className="mt-3 text-slate-400 font-medium">
+            ¿Ya tienes cuenta?{' '}
+            <Link to="/login" className="text-neon-cyan hover:text-white transition-colors">
               Inicia sesión
             </Link>
           </p>
         </div>
 
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        <form className="space-y-5" onSubmit={handleSubmit}>
           {/* Name Input */}
           <div className="space-y-2">
-            <label htmlFor="name" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Nombre Completo</label>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <UserIcon className="h-5 w-5 text-slate-400" />
+            <label htmlFor="name" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Nombre Completo</label>
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 transition-colors group-focus-within:text-neon-cyan">
+                <UserIcon className="h-5 w-5 text-slate-500 transition-colors" />
               </div>
               <input
                 id="name"
@@ -77,7 +77,7 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Juan Pérez"
-                className="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 py-3 pl-10 pr-4 text-slate-900 dark:text-white ring-1 ring-inset ring-transparent placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:focus:ring-neon-cyan"
+                className="w-full rounded-2xl bg-white/5 border-white/10 py-4 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-neon-cyan/50 focus:border-neon-cyan/50 transition-all duration-300"
                 required
               />
             </div>
@@ -85,10 +85,10 @@ const Register = () => {
 
           {/* Email Input */}
           <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Correo Electrónico</label>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <Mail className="h-5 w-5 text-slate-400" />
+            <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Correo Electrónico</label>
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 transition-colors group-focus-within:text-neon-cyan">
+                <Mail className="h-5 w-5 text-slate-500 transition-colors" />
               </div>
               <input
                 id="email"
@@ -96,7 +96,7 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@email.com"
-                className="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 py-3 pl-10 pr-4 text-slate-900 dark:text-white ring-1 ring-inset ring-transparent placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:focus:ring-neon-cyan"
+                className="w-full rounded-2xl bg-white/5 border-white/10 py-4 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-neon-cyan/50 focus:border-neon-cyan/50 transition-all duration-300"
                 required
               />
             </div>
@@ -104,10 +104,10 @@ const Register = () => {
 
           {/* Password Input */}
           <div className="space-y-2">
-            <label htmlFor="password" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Contraseña</label>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <Lock className="h-5 w-5 text-slate-400" />
+            <label htmlFor="password" className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Contraseña</label>
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 transition-colors group-focus-within:text-neon-cyan">
+                <Lock className="h-5 w-5 text-slate-500 transition-colors" />
               </div>
               <input
                 id="password"
@@ -115,23 +115,30 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Mínimo 8 caracteres"
-                className="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 py-3 pl-10 pr-4 text-slate-900 dark:text-white ring-1 ring-inset ring-transparent placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:focus:ring-neon-cyan"
+                className="w-full rounded-2xl bg-white/5 border-white/10 py-4 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-neon-cyan/50 focus:border-neon-cyan/50 transition-all duration-300"
                 required
               />
             </div>
           </div>
 
-          {error && <p className="text-sm font-bold text-red-500 text-center">{error}</p>}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3">
+              <p className="text-xs font-bold text-red-400 text-center">{error}</p>
+            </div>
+          )}
 
           {/* Submit Button */}
-          <div className="pt-2">
+          <div className="pt-4">
             <button
               type="submit"
               disabled={isLoading}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 dark:bg-neon-cyan px-4 py-3 text-sm font-bold text-white dark:text-slate-900 shadow-lg transition-all duration-300 hover:bg-slate-800 dark:hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-neon-cyan px-4 py-4 text-sm font-black text-slate-950 shadow-[0_0_20px_rgba(0,243,255,0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed group"
             >
-              {isLoading ? 'Creando cuenta...' : 'Crear Cuenta'}
-              {!isLoading && <ArrowRight className="h-5 w-5" />}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -translate-x-full group-hover:animate-shimmer" />
+              <span className="relative">
+                {isLoading ? 'Creando cuenta...' : 'Crear Cuenta'}
+              </span>
+              {!isLoading && <ArrowRight className="h-5 w-5 relative" />}
             </button>
           </div>
         </form>
