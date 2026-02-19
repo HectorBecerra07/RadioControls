@@ -49,11 +49,13 @@ const MainLayout = () => {
 
 function App() {
   return (
-    <AppProviders>
-      <div className="bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text min-h-screen">
-        <MainLayout />
-      </div>
-    </AppProviders>
+    <BrowserRouter>
+      <AppProviders>
+        <div className="bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text min-h-screen">
+          <MainLayout />
+        </div>
+      </AppProviders>
+    </BrowserRouter>
   );
 }
 
