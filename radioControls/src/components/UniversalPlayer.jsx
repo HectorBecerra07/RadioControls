@@ -107,14 +107,21 @@ const UniversalPlayer = ({ streamUrl, stationName = "Estación RadiOlea" }) => {
                 </div>
               </div>
 
-              {/* Dynamic Visualizer Bars */}
-              <div className="h-12 flex items-end justify-center md:justify-start gap-1 mb-8 opacity-40">
-                {[...Array(20)].map((_, i) => (
+              {/* Dynamic Visualizer Bars - Optimized for performance */}
+              <div className="h-12 flex items-end justify-center md:justify-start gap-1 mb-8 opacity-40 overflow-hidden">
+                {[...Array(isPlaying ? 12 : 6)].map((_, i) => (
                   <motion.div 
                     key={i}
-                    animate={isPlaying ? { height: [10, Math.random() * 48, 10] } : { height: 4 }}
-                    transition={{ repeat: Infinity, duration: 0.5 + Math.random() * 0.5 }}
-                    className="w-1.5 bg-neon-cyan rounded-full"
+                    animate={isPlaying ? { 
+                      height: [8, 20 + Math.random() * 28, 8],
+                      opacity: [0.3, 1, 0.3]
+                    } : { height: 4 }}
+                    transition={{ 
+                      repeat: Infinity, 
+                      duration: 0.6 + (i * 0.1),
+                      ease: "easeInOut"
+                    }}
+                    className="w-2 bg-neon-cyan rounded-full origin-bottom"
                   />
                 ))}
               </div>

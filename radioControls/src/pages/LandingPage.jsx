@@ -44,16 +44,28 @@ const LandingPage = () => {
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
               className="inline-flex items-center gap-2 bg-neon-cyan/10 border border-neon-cyan/20 px-4 py-1.5 rounded-full text-neon-cyan text-xs font-black uppercase tracking-[0.2em]"
             >
               <Activity size={14} className="animate-pulse" /> Ingeniería Sonora Pro
             </motion.div>
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic"
+            >
               Escucha tu <span className="text-neon-cyan">Próxima Venta</span>
-            </h2>
-            <p className="text-gray-400 font-bold max-w-xl mx-auto text-sm md:text-lg">
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-gray-400 font-bold max-w-xl mx-auto text-sm md:text-lg"
+            >
               Prueba nuestro motor de ambiente inteligente. Sonido puro, legal y diseñado para convertir visitantes en clientes.
-            </p>
+            </motion.p>
           </div>
 
           <UniversalPlayer streamUrl="/audios/Tutiendahabla.mp3" stationName="Demo: Tu tienda habla" />
